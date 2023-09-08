@@ -8,14 +8,14 @@ public class CharacterMovement : MonoBehaviour
     Animator anim;
 
     public float moveSpeed = 4.0f;
-    public float jumpForce = 6.0f;
-    bool facingRight = true;
-
-    [SerializeField] Transform groundCheck;
-    float groundCheckRadius = 1.0f;
-    public LayerMask whatIsGround;
+    public float jumpForce = 10.0f;
+    bool rightingFace = true;
     bool isGround = true;
 
+    [SerializeField] Transform groundCheck;
+    float groundCheckRadius = 0.5f;
+    public LayerMask whatIsGround;
+    
     private void Start()
     {
         rigi = GetComponent<Rigidbody2D>();
@@ -24,10 +24,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        if(rigi.velocity.x < 0 && facingRight) 
+        if(rigi.velocity.x < 0 && rightingFace)
         {
             flipFace();
-        }else if(rigi.velocity.x > 0 && !facingRight) 
+        }else if(rigi.velocity.x > 0 && !rightingFace)
         {
             flipFace();
         }
@@ -36,22 +36,23 @@ public class CharacterMovement : MonoBehaviour
         {
             Jump();
         }
+
         isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius,whatIsGround);
     }
+
     private void FixedUpdate()
     {
-        rigi.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, rigi.velocity.y);
-        anim.SetFloat("playerSpeed", Mathf.Abs(rigi.velocity.x));
+        rigi.velocity = new Vector2(Input.GetAxisRaw("Horizontal")*moveSpeed, rigi.velocity.y);
+        anim.SetFloat("playerSpeed",Mathf.Abs(rigi.velocity.x));
     }
 
     void flipFace()
     {
-        facingRight = !facingRight;
+        rightingFace = !rightingFace;
         Vector3 tempLocalScale = transform.localScale;
         tempLocalScale.x *= -1;
         transform.localScale = tempLocalScale;
     }
-
     void Jump()
     {
         rigi.AddForce(new Vector2(0f, jumpForce));
