@@ -35,6 +35,8 @@ public class CharacterMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && isGround)
         {
             Jump();
+            anim.SetTrigger("playerJump");
+            
         }
 
         isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius,whatIsGround);
