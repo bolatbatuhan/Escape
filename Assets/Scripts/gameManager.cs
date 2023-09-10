@@ -11,10 +11,11 @@ public class gameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
-        } else
+        }
+        else
         {
             Destroy(gameObject);
         }
@@ -24,7 +25,7 @@ public class gameManager : MonoBehaviour
     {
         score = 0;
         updateScoreText();
-        
+
     }
 
     public void addScore(int amount)

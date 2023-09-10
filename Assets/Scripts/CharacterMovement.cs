@@ -35,7 +35,7 @@ public class CharacterMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && isGround)
         {
             Jump();
-            anim.SetTrigger("playerJump");
+            anim.SetTrigger("playJump");
             
         }
 
