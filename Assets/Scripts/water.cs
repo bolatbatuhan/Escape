@@ -9,7 +9,7 @@ public class water : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Oyun sahnesini yeniden yükle
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

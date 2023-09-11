@@ -15,7 +15,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     float groundCheckRadius = 0.5f;
     public LayerMask whatIsGround;
-    
+
     private void Start()
     {
         rigi = GetComponent<Rigidbody2D>();
@@ -24,28 +24,29 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        if(rigi.velocity.x < 0 && rightingFace)
+        if (rigi.velocity.x < 0 && rightingFace)
         {
             flipFace();
-        }else if(rigi.velocity.x > 0 && !rightingFace)
+        }
+        else if (rigi.velocity.x > 0 && !rightingFace)
         {
             flipFace();
         }
 
-        if(Input.GetKeyDown(KeyCode.Space) && isGround)
+        if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
             Jump();
             anim.SetTrigger("playJump");
-            
+
         }
 
-        isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius,whatIsGround);
+        isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
     }
 
     private void FixedUpdate()
     {
-        rigi.velocity = new Vector2(Input.GetAxisRaw("Horizontal")*moveSpeed, rigi.velocity.y);
-        anim.SetFloat("playerSpeed",Mathf.Abs(rigi.velocity.x));
+        rigi.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, rigi.velocity.y);
+        anim.SetFloat("playerSpeed", Mathf.Abs(rigi.velocity.x));
     }
 
     void flipFace()
