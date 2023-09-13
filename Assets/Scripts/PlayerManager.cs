@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     Rigidbody2D rigi;
 
     Image HealthBar;
-
+    public GameObject player;
     public float health = 100;
     public float currentHealth;
 
@@ -35,8 +35,7 @@ public class PlayerManager : MonoBehaviour
             if (currentHealth == 0)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-
+            }         
         }
     }
 
@@ -44,6 +43,9 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         HealthBar.fillAmount = currentHealth / health;
-
+        if(player.transform.position.y < -8)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
