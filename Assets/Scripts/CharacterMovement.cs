@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour
 
     public float moveSpeed = 4.0f;
     public float jumpForce = 10.0f;
-    bool rightingFace = true;
+    bool facingRight = true;
     bool isGround = true;
 
     [SerializeField] Transform groundCheck;
@@ -24,12 +24,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        if (rigi.velocity.x < 0 && rightingFace)
-        {
+        if(rigi.velocity.x < 0 && facingRight){
+
             flipFace();
-        }
-        else if (rigi.velocity.x > 0 && !rightingFace)
-        {
+
+        } else if(rigi.velocity.x > 0 && !facingRight){
             flipFace();
         }
 
@@ -51,7 +50,7 @@ public class CharacterMovement : MonoBehaviour
 
     void flipFace()
     {
-        rightingFace = !rightingFace;
+        facingRight = !facingRight;
         Vector3 tempLocalScale = transform.localScale;
         tempLocalScale.x *= -1;
         transform.localScale = tempLocalScale;
