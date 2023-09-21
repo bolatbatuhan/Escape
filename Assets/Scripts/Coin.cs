@@ -8,7 +8,7 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        gameManager.instance.addScore(coinValue);
+        GameManager.instance.addScore(coinValue);
         Destroy(gameObject);
     }
 

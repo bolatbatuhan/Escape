@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class water : MonoBehaviour
+public class Water : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {

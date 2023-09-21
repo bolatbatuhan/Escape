@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
     Rigidbody2D rigi;
     Animator anim;
-
+    public Transform bullet;
+    public Transform muzzle;
     public float moveSpeed = 4.0f;
     public float jumpForce = 10.0f;
+    private float bulletSpeed = 500.0f;
     bool facingRight = true;
     bool isGround = true;
 
@@ -20,6 +23,7 @@ public class CharacterMovement : MonoBehaviour
     {
         rigi = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        muzzle = transform.GetChild(0);
     }
 
     private void Update()
@@ -38,8 +42,12 @@ public class CharacterMovement : MonoBehaviour
             anim.SetTrigger("playJump");
 
         }
+        if(Input.GetMouseButtonDown(0)){
+            Fire1();
+        }
 
         isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        
     }
 
     private void FixedUpdate()
@@ -58,5 +66,13 @@ public class CharacterMovement : MonoBehaviour
     void Jump()
     {
         rigi.AddForce(new Vector2(0f, jumpForce));
+    }
+    void Fire1()
+    {      
+        Transform tempBullet;
+        
+        tempBullet = Instantiate(bullet,muzzle.position,Quaternion.identity);
+        tempBullet.GetComponent<Rigidbody2D>().AddForce(muzzle.forward * bulletSpeed);
+        
     }
 }
