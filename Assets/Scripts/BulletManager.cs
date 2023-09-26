@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour
 {
     public float bulletDamage, lifeTime;
-    
+
     void Start()
     {
         Destroy(gameObject, lifeTime);
@@ -13,12 +13,12 @@ public class BulletManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("enemy"))
+        if (collision.gameObject.CompareTag("enemy"))
         {
             Destroy(gameObject);
         }
     }
-    
+
     void Update()
     {
 
