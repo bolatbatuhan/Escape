@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -28,11 +29,14 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        if(rigi.velocity.x < 0 && facingRight){
+        if (rigi.velocity.x < 0 && facingRight)
+        {
 
             flipFace();
 
-        } else if(rigi.velocity.x > 0 && !facingRight){
+        }
+        else if (rigi.velocity.x > 0 && !facingRight)
+        {
             flipFace();
         }
 
@@ -42,12 +46,13 @@ public class CharacterMovement : MonoBehaviour
             anim.SetTrigger("playJump");
 
         }
-        if(Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButtonDown(0))
+        {
             Fire1();
         }
 
-        isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        
+        isGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius,whatIsGround);
+    
     }
 
     private void FixedUpdate()
@@ -68,11 +73,14 @@ public class CharacterMovement : MonoBehaviour
         rigi.AddForce(new Vector2(0f, jumpForce));
     }
     void Fire1()
-    {      
+    {
         Transform tempBullet;
-        
-        tempBullet = Instantiate(bullet,muzzle.position,Quaternion.identity);
+
+        tempBullet = Instantiate(bullet, muzzle.position, Quaternion.identity);
         tempBullet.GetComponent<Rigidbody2D>().AddForce(muzzle.forward * bulletSpeed);
-        
+
+
     }
+
+
 }
