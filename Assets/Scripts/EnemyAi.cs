@@ -4,40 +4,42 @@ using UnityEngine;
 
 public class EnemyAi : MonoBehaviour
 {
-    private Transform target;
-    public float speed;
-    public float stopDistance;
-    void Start()
-    {
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-    }
+    public float speed = 2.0f;
+    public float leftBoundary = 6.0f;  // Soldaki sınır
+    public float rightBoundary = 17.0f; // Sağdaki sınır
 
-    void EnemyFollow()
-    {
-        if (Vector2.Distance(transform.position, target.position) > stopDistance)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        }
-    }
+    private bool movingRight = true; // Başlangıçta sağa hareket edilsin mi?
+
     void Update()
     {
-        EnemyFollow();
+        // Düşmanı hareket ettir
+        if (movingRight)
+        {
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        }
 
-        if (transform.position.x < 6)
+        // Düşmanın sınırlara ulaşıp ulaşmadığını kontrol et
+        if (transform.position.x >= rightBoundary)
         {
-            transform.position = new Vector3(6, transform.position.y, transform.position.x);
+            movingRight = false; // Sınırı geçince sola gitmeye başla
         }
-        if (transform.position.x > 17)
+        else if (transform.position.x <= leftBoundary)
         {
-            transform.position = new Vector3(17, transform.position.y, transform.position.x);
+            movingRight = true; // Sınırı geçince sağa gitmeye başla
         }
-        if (transform.position.y < -0.7f)
+
+
+    }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
         {
-            transform.position = new Vector3(transform.position.x, -0.7f, transform.position.x);
-        }
-        if (transform.position.y > -0.7f)
-        {
-            transform.position = new Vector3(transform.position.x, -0.7f, transform.position.x);
+            movingRight = !movingRight;
         }
     }
+
 }

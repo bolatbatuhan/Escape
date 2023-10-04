@@ -14,6 +14,10 @@ public class EnemyManager : MonoBehaviour
         if (collision.gameObject.CompareTag("bullet"))
         {
             GetDamage(collision.gameObject.GetComponent<BulletManager>().bulletDamage);
+            
+        }
+        if(health <= 0)
+        {
             Destroy(gameObject);
         }
     }
@@ -38,4 +42,5 @@ public class EnemyManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
 }
