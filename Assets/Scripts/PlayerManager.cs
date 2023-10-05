@@ -30,7 +30,7 @@ public class PlayerManager : MonoBehaviour
         {
             currentHealth -= getDamage;
 
-            rigi.AddForce(new Vector2(3f, 5f), ForceMode2D.Impulse);
+            rigi.AddForce(new Vector2(-15f, 2f), ForceMode2D.Impulse);
 
             if (currentHealth == 0)
             {
@@ -48,4 +48,5 @@ public class PlayerManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+   
 }
