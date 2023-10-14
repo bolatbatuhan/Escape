@@ -25,6 +25,7 @@ public class CharacterMovement : MonoBehaviour
         rigi = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         muzzle = transform.GetChild(0);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()

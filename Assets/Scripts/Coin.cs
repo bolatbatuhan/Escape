@@ -6,10 +6,13 @@ public class Coin : MonoBehaviour
 {
     public int coinValue = 10;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        GameManager.instance.addScore(coinValue);
-        Destroy(gameObject);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            GameManager.instance.addScore(coinValue);
+            Destroy(gameObject);
+        }
     }
 
 }
